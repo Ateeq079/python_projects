@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: github-data
+Version: 0.1.0
+Summary: GitHub user data CLI
+Requires-Dist: click
+Requires-Dist: requests

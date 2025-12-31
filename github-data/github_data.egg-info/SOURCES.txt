@@ -1,0 +1,10 @@
+pyproject.toml
+github_data/__init__.py
+github_data/api.py
+github_data/cli.py
+github_data.egg-info/PKG-INFO
+github_data.egg-info/SOURCES.txt
+github_data.egg-info/dependency_links.txt
+github_data.egg-info/entry_points.txt
+github_data.egg-info/requires.txt
+github_data.egg-info/top_level.txt

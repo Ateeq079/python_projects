@@ -1,0 +1,11 @@
+[project]
+name = "github-data"
+version = "0.1.0"
+description = "GitHub user data CLI"
+dependencies = [
+    "click",
+    "requests"
+]
+
+[project.scripts]
+github-data = "github_data.cli:main"
