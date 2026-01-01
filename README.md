@@ -1,4 +1,4 @@
-https://roadmap.sh/projects/github-user-activity 
+https://roadmap.sh/projects/github-user-activity k
 # Python Projects
 
 This repository contains a collection of **small, focused Python projects** built to practice real-world development concepts such as APIs, CLI tools, automation, and clean project structure.
