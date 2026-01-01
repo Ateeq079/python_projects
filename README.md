@@ -49,7 +49,8 @@ Requests
 
 GitHub REST API
 
-2. Number Guessing Game (Python)
+2.Number Guessing Game (Python)
+<https://roadmap.sh/projects/number-guessing-game>
 Folder: number-guessing-game/
 
 A command-line based number guessing game written in Python.
@@ -57,36 +58,27 @@ A command-line based number guessing game written in Python.
 What it does
 
 Randomly generates a number within a defined range
-
 Allows the user to select a difficulty level (Easy, Medium, Hard)
-
 Limits the number of guesses based on difficulty
-
 Provides feedback after each guess (too high / too low)
-
 Ends the game when the number is guessed or attempts run out
 
 Example
-
-
 python  main.py
 
 Concepts covered
-
 Control flow (if/else, loops)
-
 User input validation
-
 Random number generation
-
 Game logic and state management
-
 Basic CLI interaction
 
 This project focuses on strengthening core Python fundamentals, logical thinking, and clean control-flow design for beginner-level programs.
 
 🛠 Tech Stack
+
 Python (standard library)
+
 🎯 Goal of This Repository
 Build practical Python projects
 
@@ -96,7 +88,7 @@ Gain hands-on experience with tooling and automation
 
 Create portfolio-ready projects
 
-📌 Noteshttps://roadmap.sh/projects/github-user-activity k
+📌 Noteshttps://roadmap.sh/projects/github-user-activity 
 Python Projects
 This repository contains a collection of small, focused Python projects built to practice real-world development concepts such as APIs, CLI tools, automation, and clean project structure.
 
