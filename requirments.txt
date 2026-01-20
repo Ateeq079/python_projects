@@ -1,0 +1,8 @@
+certifi==2025.11.12
+charset-normalizer==3.4.4
+click==8.3.1
+-e git+ssh://git@github.com/Ateeq079/python_projects.git@4ceb86c0c5596126680bd34dc62b6e49a9dcee6c#egg=github_data&subdirectory=github-data
+idna==3.11
+psycopg2-binary==2.9.11
+requests==2.32.5
+urllib3==2.6.2
