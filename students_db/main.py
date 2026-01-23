@@ -1,108 +1,84 @@
-import psycopg2
+from db import get_connection
+from crud import (
+    create_student,
+    read_student,
+    update_student,
+    delete_student,
+)
+
+
+def show_menu():
+    print(
+        """
+---------
+1. Create a Student
+2. Read Student data
+3. Update Student data
+4. Delete Student data
+5. Exit
+---------
+"""
+    )
+
+
+def get_choice():
+    return int(input("Enter your choice: "))
+
+
+def print_students_table(students):
+    print("-" * 72)
+    print(f"{'ID':<5} {'Name':<15} {'Dept':<16} {'GPA':<10} {'Grade':<10}")
+    print("-" * 72)
+    for s in students:
+        print(f"{s[0]:<5} {s[1]:<15} {s[2]:<16} {s[3]:<10} {s[4]:<10}")
+    print("-" * 72)
 
 
 def main():
-
-    conn = psycopg2.connect(
-        host="localhost",
-        dbname="student_db",
-        user="postgres",
-        password="1234",
-        port=5432,
-    )
-
+    conn = get_connection()
     cursor = conn.cursor()
 
-    def create(name, dept, gpa, grade):
-        cursor.execute(
-            "INSERT INTO std_info(name, dept, gpa, grade) VALUES(%s, %s, %s, %s );",
-            (name, dept, gpa, grade),
-        )
-        conn.commit()
-
-    def read(st_id):
-        student = None
-        if st_id >= 0:
-            cursor.execute(
-                "SELECT * FROM std_info WHERE st_id = %s ORDER BY st_id; ", (st_id,)
-            )
-            student = cursor.fetchall()
-        else:
-            cursor.execute("SELECT * FROM std_info;")
-            student = cursor.fetchall()
-        conn.commit()
-        return student
-
-    def update(st_id, name, dept, gpa, grade):
-        cursor.execute(
-            """
-        UPDATE std_info
-        SET name=%s, dept=%s, gpa=%s, grade=%s
-        WHERE st_id=%s
-    """,
-            (name, dept, gpa, grade, st_id),
-        )
-        conn.commit()
-
-    def delete(st_id):
-        if st_id:
-            cursor.execute("DELETE FROM std_info WHERE st_id=%s;", (st_id,))
-            conn.commit()
-        else:
-            print("Student does not exist.")
-
-    def print_students_table(students):
-        print("-" * 72)
-        print(f"{'ID':<5} {'Name':<15} {'Dept':<16} {'GPA':<10} {'Grade':<10}")
-        print("-" * 72)
-        for s in students:
-            print(f"{s[0]:<5} {s[1]:<15} {s[2]:<16} {s[3]:<10} {s[4]:<10}")
-        print("-" * 72)
-
-    print("Welcome to Student Managment Program")
-    print("Select an operation")
+    print("Welcome to Student Management Program")
 
     while True:
-        choice = int(
-            input(
-                " ---------\n1.Create a Student. \n2.Read a Student data. \n3.Update a Student data. \n4.Delete a Student data \n5.Exit \n -----------\n"
-            )
-        )
-        if choice == 1:
-            name = input("Enter student name:")
-            dept = input("Enter dept:")
-            gpa = input("Enter gpa:")
-            grade = input("Enter grade:")
+        show_menu()
+        choice = get_choice()
 
-            create(name, dept, gpa, grade)
+        if choice == 1:
+            name = input("Enter student name: ")
+            dept = input("Enter dept: ")
+            gpa = input("Enter gpa: ")
+            grade = input("Enter grade: ")
+            create_student(cursor, conn, name, dept, gpa, grade)
 
         elif choice == 2:
-            st_data = None
             try:
-                st_id = int(input("Enter student ID:"))
-                st_data = read(st_id)
-            except Exception as e:
-                st_data = read(-1)
-            print_students_table(st_data)
+                st_id = int(input("Enter student ID (or press Enter for all): "))
+                students = read_student(cursor, st_id)
+            except:
+                students = read_student(cursor)
+            print_students_table(students)
 
         elif choice == 3:
-            st_id = int(input("Enter student ID:"))
-            name = input("Enter student name")
-            dept = input("Enter dept")
-            gpa = input("Enter gpa")
-            grade = input("Enter grade")
-            update(st_id, name, dept, gpa, grade)
+            st_id = int(input("Enter student ID: "))
+            name = input("Enter student name: ")
+            dept = input("Enter dept: ")
+            gpa = input("Enter gpa: ")
+            grade = input("Enter grade: ")
+            update_student(cursor, conn, st_id, name, dept, gpa, grade)
 
         elif choice == 4:
-            st_id = int(input("Enter student ID:"))
-            if delete(st_id):
-                print("The student has been succesfully deleted")
+            st_id = int(input("Enter student ID: "))
+            delete_student(cursor, conn, st_id)
+            print("Student deleted successfully")
 
         elif choice == 5:
-            print("Closing")
-            return False
+            print("Closing program")
+            break
 
-    conn.commit()
+        else:
+            print("Invalid choice")
+
     cursor.close()
     conn.close()
 

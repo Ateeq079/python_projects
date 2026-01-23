@@ -1,1 +1,1 @@
-SELECT * FROM std_info;
+SELECT * FROM std_info ORDER BY st_id;
